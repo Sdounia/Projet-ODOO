@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action pour Animaux -->
+    <record id="action_tp_animal" model="ir.actions.act_window">
+        <field name="name">Animaux</field>
+        <field name="res_model">tp.animal</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Animaux -->
+    <menuitem id="menu_tp_root" name="Gestion Animaux" sequence="10"/>
+    <menuitem id="menu_tp_animaux" name="Animaux"
+              parent="menu_tp_root"
+              action="action_tp_animal"
+              sequence="10"/>
+
+    <!-- Vue Tree Animal -->
+    <record id="view_tp_animal_tree" model="ir.ui.view">
+        <field name="name">tp.animal.tree</field>
+        <field name="model">tp.animal</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="espece"/>
+                <field name="race"/>
+                <field name="proprietaire"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vue Form Animal avec onglet Vaccins -->
+    <record id="view_tp_animal_form" model="ir.ui.view">
+        <field name="name">tp.animal.form</field>
+        <field name="model">tp.animal</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="espece"/>
+                        <field name="race"/>
+                        <field name="date_naissance"/>
+                        <field name="proprietaire"/>
+                    </group>
+                    <notebook>
+                        <page string="Vaccins">
+                            <field name="vaccin_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date_vaccination"/>
+                                    <field name="veterinaire"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
